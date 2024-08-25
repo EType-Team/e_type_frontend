@@ -9,7 +9,8 @@ const Logo = () => {
                     src='/etype.png'
                     alt="logo"
                     width={140}
-                    height={20}
+                    height={0}
+                    priority={true}
                 />
             </Link>
         </>
