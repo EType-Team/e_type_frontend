@@ -9,8 +9,9 @@ interface StudyProps {
     label: string
     time: number
     words: {
-        id: number;
-        word: string;
+        id: number
+        english: string
+        japanese: string
     }[];
 }
 
