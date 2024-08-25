@@ -3,15 +3,21 @@
 import { useState } from "react";
 import ReadyCard from "./ready-card";
 import Timer from "./timer";
+import PlayCard from "./play-card";
 
 interface StudyProps {
     label: string
     time: number
+    words: {
+        id: number;
+        word: string;
+    }[];
 }
 
 const Study = ({
     label,
-    time
+    time,
+    words
 }: StudyProps) => {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
@@ -21,9 +27,9 @@ const Study = ({
                 isActive={activeIndex === 1}
             />
             {activeIndex === 1 ? (
-                <div>
-                    ここに英単語を表示させる
-                </div>
+                <PlayCard
+                    words={words}
+                />
             ): (
                 <ReadyCard
                     label={label}
