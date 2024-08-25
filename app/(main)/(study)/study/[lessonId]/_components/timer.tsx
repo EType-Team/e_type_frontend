@@ -6,11 +6,13 @@ import { useEffect, useState } from "react"
 interface TimerProps {
     time: number
     isActive: boolean
+    onEnd: () => void
 }
 
 const Timer = ({
     time,
-    isActive
+    isActive,
+    onEnd
 }: TimerProps) => {
     const [progress, setProgress] = useState(0)
 
@@ -24,6 +26,7 @@ const Timer = ({
             setProgress((prevProgress) => {
                 if (prevProgress >= 100) {
                     clearInterval(intervalId)
+                    onEnd()
                     return 100
                 }
                 return prevProgress + increment
