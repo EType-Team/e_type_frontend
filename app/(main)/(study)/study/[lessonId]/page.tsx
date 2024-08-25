@@ -1,38 +1,28 @@
-'use client'
-
-import { Progress } from "@/components/ui/progress";
-import { useEffect, useState } from "react";
+import ReadyCard from "./_components/ready-card";
+import Study from "./_components/study";
+import Timer from "./_components/timer";
 
 const StudyLessonIdPage = ({
     params
 }: {
     params: { lessonId: string }
 }) => {
-    const [progress, setProgress] = useState(0)
 
-    useEffect(() => {
-        const totalDuration = 120000
-        const updateInterval = 100
-        const increment = 100 / (totalDuration / updateInterval)
-
-        const intervalId = setInterval(() => {
-            setProgress((prevProgress) => {
-                if (prevProgress >= 100) {
-                    clearInterval(intervalId)
-                    return 100
-                }
-                return prevProgress + increment
-            });
-        }, updateInterval)
-
-        return () => clearInterval(intervalId)
-    }, []);
+    // lessonIdよりlesson情報を取得する予定
+    const lessonInfo = { label: 'easy', time: 120000, words: [
+        {id: 1, word: 'apple'},
+        {id: 2, word: 'banana'},
+        {id: 3, word: 'cherry'},
+        {id: 4, word: 'customer'}
+    ]};
 
     return ( 
-        <div className="relative flex flex-col items-center">
-            <Progress value={progress} className="w-[60%] m-4" />
-
-            {params.lessonId}
+        <div className="relative flex flex-col items-center gap-y-52">
+            <Study
+                label={lessonInfo.label}
+                time={lessonInfo.time}
+                words={lessonInfo.words}
+            />
         </div>
      );
 }
