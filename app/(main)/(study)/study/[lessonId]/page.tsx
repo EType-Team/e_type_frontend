@@ -10,10 +10,10 @@ const StudyLessonIdPage = ({
 
     // lessonIdよりlesson情報を取得する予定
     const lessonInfo = { label: 'easy', time: 120000, words: [
-        {id: 1, word: 'apple'},
-        {id: 2, word: 'banana'},
-        {id: 3, word: 'cherry'},
-        {id: 4, word: 'customer'}
+        {id: 1, english: 'apple', japanese: 'りんご'},
+        {id: 1, english: 'banana', japanese: 'ばなな'},
+        {id: 1, english: 'cherry', japanese: 'さくらんぼ'},
+        {id: 1, english: 'customer', japanese: 'お客さん'}
     ]};
 
     return ( 
