@@ -1,15 +1,24 @@
 'use client'
 
-import { Progress } from "@/components/ui/progress";
-import { useEffect, useState } from "react";
+import { Progress } from "@/components/ui/progress"
+import { useEffect, useState } from "react"
 
-const Timer = () => {
+interface TimerProps {
+    time: number
+    isActive: boolean
+}
+
+const Timer = ({
+    time,
+    isActive
+}: TimerProps) => {
     const [progress, setProgress] = useState(0)
 
     useEffect(() => {
-        const totalDuration = 120000
+        if (!isActive) return
+
         const updateInterval = 100
-        const increment = 100 / (totalDuration / updateInterval)
+        const increment = 100 / (time / updateInterval)
 
         const intervalId = setInterval(() => {
             setProgress((prevProgress) => {
@@ -18,15 +27,16 @@ const Timer = () => {
                     return 100
                 }
                 return prevProgress + increment
-            });
+            })
         }, updateInterval)
 
         return () => clearInterval(intervalId)
-    }, []);
+    }, [isActive])
+
 
     return ( 
         <Progress value={progress} className="w-[60%] m-4" />
-     );
+    )
 }
  
-export default Timer;
+export default Timer
