@@ -21,24 +21,31 @@ const Study = ({
     words
 }: StudyProps) => {
     const [activeIndex, setActiveIndex] = useState(0)
+    const [onEnd, setOnEnd] = useState(0)
     return (
         <>
             <Timer 
                 time={time}
                 isActive={activeIndex === 1}
+                onEnd={() => setOnEnd(1)}
             />
-            {activeIndex === 1 ? (
-                <PlayCard
-                    words={words}
-                />
-            ): (
+            {activeIndex === 0 && onEnd === 0 && (
                 <ReadyCard
                     label={label}
                     time={time}
                     onStart={() => setActiveIndex(1)}
                 />
             )}
-            
+            {activeIndex === 1 && onEnd === 0 && (
+                <PlayCard
+                    words={words}
+                />
+            )}
+            {activeIndex === 1 && onEnd === 1 && (
+                <>
+                    終了!
+                </>
+            )}
         </>
     );
 }
