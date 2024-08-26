@@ -4,6 +4,7 @@ import { useState } from "react";
 import ReadyCard from "./ready-card";
 import Timer from "./timer";
 import PlayCard from "./play-card";
+import ResultCard from "./result-card";
 
 interface StudyProps {
     label: string
@@ -42,9 +43,7 @@ const Study = ({
                 />
             )}
             {activeIndex === 1 && onEnd === 1 && (
-                <>
-                    終了!
-                </>
+                <ResultCard />
             )}
         </>
     );
