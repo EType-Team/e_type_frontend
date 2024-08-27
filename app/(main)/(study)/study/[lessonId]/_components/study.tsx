@@ -21,28 +21,28 @@ const Study = ({
     time,
     words
 }: StudyProps) => {
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [isActive, setIsActive] = useState(0)
     const [onEnd, setOnEnd] = useState(0)
     return (
         <>
             <Timer 
                 time={time}
-                isActive={activeIndex === 1}
+                isActive={isActive === 1}
                 onEnd={() => setOnEnd(1)}
             />
-            {activeIndex === 0 && onEnd === 0 && (
+            {isActive === 0 && onEnd === 0 && (
                 <ReadyCard
                     label={label}
                     time={time}
-                    onStart={() => setActiveIndex(1)}
+                    onStart={() => setIsActive(1)}
                 />
             )}
-            {activeIndex === 1 && onEnd === 0 && (
+            {isActive === 1 && onEnd === 0 && (
                 <PlayCard
                     words={words}
                 />
             )}
-            {activeIndex === 1 && onEnd === 1 && (
+            {isActive === 1 && onEnd === 1 && (
                 <ResultCard />
             )}
         </>
