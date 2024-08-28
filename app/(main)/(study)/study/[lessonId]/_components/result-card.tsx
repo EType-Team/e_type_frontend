@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import ResultContent from "./result-content";
 
 const ResultCard = () => {
     const [isResult, setIsResult] = useState(false)
@@ -12,9 +13,7 @@ const ResultCard = () => {
     return (
         <>
             {isResult ? (
-                <>
-                    結果の表示
-                </>
+                <ResultContent />
             ) : (
                 <>
                     終了！
