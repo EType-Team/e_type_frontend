@@ -3,8 +3,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { LucideIcon } from "lucide-react";
-import Link from "next/link";
+import { LucideIcon } from "lucide-react"
+import Link from "next/link"
 
 interface LessonCardProps {
     icon: LucideIcon
