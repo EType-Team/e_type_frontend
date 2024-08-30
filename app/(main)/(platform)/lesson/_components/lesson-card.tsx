@@ -23,9 +23,7 @@ const LessonCard = ({
                 href={`/study/${lessonId}`}
                 className="flex flex-col items-center"
             >
-                <Icon
-                    className="m-4"
-                />
+                <Icon className="m-4" />
                 <CardHeader>
                     <CardTitle>{label}</CardTitle>
                 </CardHeader>
