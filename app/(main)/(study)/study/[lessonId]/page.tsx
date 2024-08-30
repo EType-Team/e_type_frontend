@@ -1,6 +1,4 @@
-import ReadyCard from "./_components/ready-card";
 import Study from "./_components/study";
-import Timer from "./_components/timer";
 
 const StudyLessonIdPage = ({
     params
