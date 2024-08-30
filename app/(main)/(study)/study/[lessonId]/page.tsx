@@ -21,7 +21,7 @@ const StudyLessonIdPage = ({
         {id: 11, english: 'court', japanese: '裁判所'},
         {id: 12, english: 'auditorium', japanese: '講堂'},
         {id: 13, english: 'appendix', japanese: '付録'}
-    ]};
+    ]}
 
     return ( 
         <div className="relative flex flex-col items-center gap-y-52">
@@ -31,7 +31,7 @@ const StudyLessonIdPage = ({
                 words={lessonInfo.words}
             />
         </div>
-     );
+    )
 }
  
 export default StudyLessonIdPage;
