@@ -1,7 +1,7 @@
 'use client'
 
-import { BookCheck, Layout, Settings } from "lucide-react";
-import SidebarItem from "@/components/sidebar-item";
+import { BookCheck, Layout, Settings } from "lucide-react"
+import SidebarItem from "@/components/sidebar-item"
 
 const setRoutes = [
     {
@@ -33,7 +33,7 @@ const SidebarRoutes = () => {
                 />
             ))}
         </div>
-     );
+    )
 }
  
-export default SidebarRoutes;
+export default SidebarRoutes

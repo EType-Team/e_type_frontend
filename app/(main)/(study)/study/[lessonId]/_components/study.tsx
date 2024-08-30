@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from "react";
-import ReadyCard from "./ready-card";
-import Timer from "./timer";
-import PlayCard from "./play-card";
-import ResultCard from "./result-card";
+import { useState } from "react"
+import ReadyCard from "./ready-card"
+import Timer from "./timer"
+import PlayCard from "./play-card"
+import ResultCard from "./result-card"
 
 interface StudyProps {
     label: string
@@ -13,7 +13,7 @@ interface StudyProps {
         id: number
         english: string
         japanese: string
-    }[];
+    }[]
 }
 
 const Study = ({
@@ -46,7 +46,7 @@ const Study = ({
                 <ResultCard />
             )}
         </>
-    );
+    )
 }
  
-export default Study;
+export default Study

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/sidebar"
 
 const PlatformLayout = ({
     children
@@ -14,7 +14,7 @@ const PlatformLayout = ({
                 {children}
             </main>
         </>
-    );
+    )
 }
  
-export default PlatformLayout;
+export default PlatformLayout

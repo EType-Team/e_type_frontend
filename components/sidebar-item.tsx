@@ -15,8 +15,8 @@ const SidebarItem = ({
     label,
     href
 }: SidebarItemProps) => {
-    const pathname = usePathname();
-    const router = useRouter();
+    const pathname = usePathname()
+    const router = useRouter()
 
     const isActive = 
         (pathname === '/' && href === '/') ||
@@ -47,7 +47,7 @@ const SidebarItem = ({
                 {label}
             </div>
         </button>
-     );
+    )
 }
  
-export default SidebarItem;
+export default SidebarItem

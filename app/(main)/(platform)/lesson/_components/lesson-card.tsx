@@ -29,7 +29,7 @@ const LessonCard = ({
                 </CardHeader>
             </Link>
         </Card>
-     );
+    )
 }
  
 export default LessonCard;

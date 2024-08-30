@@ -1,5 +1,5 @@
-import { PencilLine } from "lucide-react";
-import LessonCard from "./_components/lesson-card";
+import { PencilLine } from "lucide-react"
+import LessonCard from "./_components/lesson-card"
 
 const LessonPage = () => {
     return ( 
@@ -10,7 +10,7 @@ const LessonPage = () => {
                 lessonId="1"
             />
         </div>
-     );
+    )
 }
  
-export default LessonPage;
+export default LessonPage

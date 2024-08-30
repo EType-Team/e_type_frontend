@@ -24,7 +24,7 @@ const ReadyCard = ({
                 スタート
             </Button>
         </div>
-    );
+    )
 }
  
-export default ReadyCard;
+export default ReadyCard

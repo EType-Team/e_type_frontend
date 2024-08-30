@@ -3,7 +3,7 @@ const SettingsPage = () => {
         <div>
             設定ページ
         </div>
-     );
+    )
 }
  
-export default SettingsPage;
+export default SettingsPage

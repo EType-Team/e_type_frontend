@@ -1,4 +1,4 @@
-import SidebarRoutes from "@/components/sidebar-routes";
+import SidebarRoutes from "@/components/sidebar-routes"
 
 const Sidebar = () => {
     return ( 
@@ -7,7 +7,7 @@ const Sidebar = () => {
                 <SidebarRoutes />
             </div>
         </div>
-     );
+    )
 }
  
-export default Sidebar;
+export default Sidebar

@@ -7,7 +7,7 @@ const StudyLayout = ({
         <main className="pt-[70px] h-full">
             {children}
         </main>
-     );
+    )
 }
  
-export default StudyLayout;
+export default StudyLayout

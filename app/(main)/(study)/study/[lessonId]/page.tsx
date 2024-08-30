@@ -1,4 +1,4 @@
-import Study from "./_components/study";
+import Study from "./_components/study"
 
 const StudyLessonIdPage = ({
     params
@@ -34,4 +34,4 @@ const StudyLessonIdPage = ({
     )
 }
  
-export default StudyLessonIdPage;
+export default StudyLessonIdPage

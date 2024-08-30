@@ -1,23 +1,23 @@
 'use client'
 
-import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react"
 
 interface PlayCardProps {
     words: {
         id: number
         english: string
         japanese: string
-    }[];
+    }[]
 }
 
 const PlayCard = ({
     words
 }: PlayCardProps) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [status, setStatus] = useState<string[]>([]);
-    const [correct, setCorrect] = useState(false);
-    const inputRef = useRef("");
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [status, setStatus] = useState<string[]>([])
+    const [correct, setCorrect] = useState(false)
+    const inputRef = useRef("")
 
     const handleKeyPress = (e: KeyboardEvent) => {
         if (e.key.length > 1) return
@@ -78,4 +78,4 @@ const PlayCard = ({
     )
 }
  
-export default PlayCard;
+export default PlayCard

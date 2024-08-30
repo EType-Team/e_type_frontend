@@ -3,7 +3,7 @@ const DashboardPage = () => {
         <div>
             ダッシュボードページ
         </div>
-    );
+    )
 }
  
-export default DashboardPage;
+export default DashboardPage
