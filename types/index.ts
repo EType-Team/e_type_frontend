@@ -13,7 +13,13 @@ export type CsrfToken = {
     csrf_token: string
 }
 
-export type Credential = {
+export type ResigterCredential = {
+    name: string
+    email: string
+    password: string
+}
+
+export type LoginCredentail = {
     email: string
     password: string
 }
