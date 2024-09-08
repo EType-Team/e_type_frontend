@@ -2,7 +2,7 @@
 
 import useUserWordProgressStore from "@/store/user-word-progress-store"
 import { useRouter } from "next/navigation"
-import { userError } from "./useError"
+import { userError } from "./use-error"
 import { useMutation } from "@tanstack/react-query"
 import { ResigterCredential, LoginCredentail } from "@/types"
 import axios from "axios"
