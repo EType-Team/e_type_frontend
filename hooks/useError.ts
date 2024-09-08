@@ -1,3 +1,5 @@
+"use client"
+
 import useUserWordProgressStore from "@/store/user-word-progress-store"
 import { CsrfToken } from "@/types"
 import axios from "axios"
