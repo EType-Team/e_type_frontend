@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import CsrfProvider from "@/components/csrf-provider"
+import QueryClientNextProvider from "@/components/query-client-next-provider"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
-          <CsrfProvider>
-        {children}
-          </CsrfProvider>
+          <QueryClientNextProvider>
+            <CsrfProvider>
+              {children}
+            </CsrfProvider>
+          </QueryClientNextProvider>
       </body>
     </html>
   )
