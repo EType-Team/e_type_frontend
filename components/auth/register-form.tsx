@@ -11,11 +11,12 @@ const RegisterForm = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { loginMutation } = useMutateAuth()
+    const { registerMutation } = useMutateAuth()
 
     const submitLoginHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        loginMutation.mutate({
+        registerMutation.mutate({
+            name: name,
             email: email,
             password: password
         })
@@ -38,7 +39,7 @@ const RegisterForm = () => {
                         type="text"
                         autoFocus
                         placeholder="ユーザ名"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setName(e.target.value)}
                         value={name}
                     />
                 </div>
@@ -64,14 +65,14 @@ const RegisterForm = () => {
                         value={password}
                     />
                 </div>
+                <Button
+                    disabled={!name || !email || !password}
+                    type="submit"
+                    className="w-full mt-4 bg-blue-500 hover:bg-blue-700"
+                >
+                    新規作成
+                </Button>
             </form>
-            <Button
-                disabled={!name || !email || !password}
-                type="submit"
-                className="w-full mt-4 bg-blue-500 hover:bg-blue-700"
-            >
-                新規作成
-            </Button>
         </CardWrapper>
     )
 }
