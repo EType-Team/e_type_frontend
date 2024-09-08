@@ -52,14 +52,14 @@ const LoginForm = () => {
                         value={password}
                     />
                 </div>
+                <Button
+                    disabled={!email || !password}
+                    type="submit"
+                    className="w-full mt-4 bg-blue-500 hover:bg-blue-700"
+                >
+                    ログイン
+                </Button>
             </form>
-            <Button
-                disabled={!email || !password}
-                type="submit"
-                className="w-full mt-4 bg-blue-500 hover:bg-blue-700"
-            >
-                ログイン
-            </Button>
         </CardWrapper>
     )
 }
