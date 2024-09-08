@@ -2,7 +2,7 @@
 
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
-import { useMutateAuth } from "@/hooks/useMutateAuth";
+import { useMutateAuth } from "@/hooks/use-mutate-auth";
 import { FormEvent, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

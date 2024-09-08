@@ -5,7 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { useMutateAuth } from "@/hooks/useMutateAuth"
+import { useMutateAuth } from "@/hooks/use-mutate-auth"
 import { LucideIcon } from "lucide-react"
 
 interface LogoutCardProps {
