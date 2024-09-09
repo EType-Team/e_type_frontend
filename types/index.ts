@@ -23,3 +23,23 @@ export type LoginCredentail = {
     email: string
     password: string
 }
+
+export type Word = {
+    id: number
+    english: string
+    japanese: string
+    mp3path: string
+}
+
+export type Lesson = {
+    id: number
+    title: string
+    description: string
+}
+
+export type LessonWord = {
+    id: number
+    lessonId: string
+    wordId: string
+    word: Word
+}
