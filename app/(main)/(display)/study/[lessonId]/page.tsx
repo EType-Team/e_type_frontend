@@ -1,34 +1,45 @@
+import { cookies } from "next/headers"
 import Study from "./_components/study"
+import { Lesson, LessonWord } from "@/types"
 
-const StudyLessonIdPage = ({
+const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+const StudyLessonIdPage = async ({
     params
 }: {
     params: { lessonId: string }
 }) => {
+    const lessonData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${params.lessonId}`, {
+        headers: { Cookie: cookies().toString() },
+    })
+    const lesson: Lesson = await lessonData.json()
 
-    // lessonIdでlesson情報を取得する予定
-    const lessonInfo = { label: 'easy', time: 30000, words: [
-        {id: 1, english: 'apple', japanese: 'りんご'},
-        {id: 2, english: 'banana', japanese: 'ばなな'},
-        {id: 3, english: 'cherry', japanese: 'さくらんぼ'},
-        {id: 4, english: 'customer', japanese: 'お客さん'},
-        {id: 5, english: 'president', japanese: '大統領さん'},
-        {id: 6, english: 'copyright', japanese: '著作権'},
-        {id: 7, english: 'employer', japanese: '雇用主'},
-        {id: 8, english: 'receptionist', japanese: '受付'},
-        {id: 9, english: 'engineer', japanese: '技術者'},
-        {id: 10, english: 'clerk', japanese: '事務員'},
-        {id: 11, english: 'court', japanese: '裁判所'},
-        {id: 12, english: 'auditorium', japanese: '講堂'},
-        {id: 13, english: 'appendix', japanese: '付録'}
-    ]}
+    const lessonWordsData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessonWord/${params.lessonId}`, {
+        headers: { Cookie: cookies().toString() },
+    })
+    const lessonWords: LessonWord[] = await lessonWordsData.json()
+
+    const words = lessonWords.map((lw: any) => ({
+        id: lw.word.id,
+        english: lw.word.english,
+        japanese: lw.word.japanese,
+        mp3Path: lw.word.mp3_path,
+    }))
+
+    const shuffledWords = shuffleArray(words)
 
     return ( 
         <div className="relative flex flex-col items-center gap-y-52">
             <Study
-                label={lessonInfo.label}
-                time={lessonInfo.time}
-                words={lessonInfo.words}
+                label={lesson.title}
+                time={30000}
+                words={shuffledWords}
             />
         </div>
     )
