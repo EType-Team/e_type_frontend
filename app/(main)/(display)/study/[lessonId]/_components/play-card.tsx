@@ -61,7 +61,7 @@ const PlayCard = ({
 
     return (
         <div className="flex flex-col items-center">
-            <p className="text-4xl font-bold">
+            <p className="text-5xl font-bold">
                 {words[currentIndex].english.split("").map((char, index) => (
                     <span
                         key={index}
@@ -74,7 +74,9 @@ const PlayCard = ({
                     </span>
                 ))}
             </p>
-            {correct && words[currentIndex].japanese}
+            <p className="text-2xl">
+                {correct && words[currentIndex].japanese}
+            </p>
         </div>
     )
 }

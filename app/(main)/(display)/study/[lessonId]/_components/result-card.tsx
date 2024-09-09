@@ -15,9 +15,9 @@ const ResultCard = () => {
             {isResult ? (
                 <ResultContent />
             ) : (
-                <>
+                <p className="text-3xl font-semibold">
                     終了！
-                </>
+                </p>
             )}
         </>
     );
