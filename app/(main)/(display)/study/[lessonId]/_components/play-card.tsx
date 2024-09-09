@@ -8,6 +8,7 @@ interface PlayCardProps {
         id: number
         english: string
         japanese: string
+        mp3Path: string
     }[]
 }
 

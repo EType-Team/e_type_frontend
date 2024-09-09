@@ -13,6 +13,7 @@ interface StudyProps {
         id: number
         english: string
         japanese: string
+        mp3Path: string
     }[]
 }
 
