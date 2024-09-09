@@ -9,7 +9,7 @@ import Link from "next/link"
 interface LessonCardProps {
     icon: LucideIcon
     label: string
-    lessonId: string
+    lessonId: number
 }
 
 const LessonCard = ({
