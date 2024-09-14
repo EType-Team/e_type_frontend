@@ -15,23 +15,21 @@ const StudyLessonIdPage = async ({
 }: {
     params: { lessonId: string }
 }) => {
+    const cookie = cookies().toString()
     const lessonData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${params.lessonId}`, {
-        headers: { Cookie: cookies().toString() },
+        headers: { Cookie: cookie },
     })
     const lesson: Lesson = await lessonData.json()
-
     const lessonWordsData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessonWord/${params.lessonId}`, {
-        headers: { Cookie: cookies().toString() },
+        headers: { Cookie: cookie },
     })
     const lessonWords: LessonWord[] = await lessonWordsData.json()
-
     const words = lessonWords.map((lw: any) => ({
         id: lw.word.id,
         english: lw.word.english,
         japanese: lw.word.japanese,
         mp3Path: lw.word.mp3_path,
     }))
-
     const shuffledWords = shuffleArray(words)
 
     return ( 
@@ -39,6 +37,7 @@ const StudyLessonIdPage = async ({
             <Study
                 label={lesson.title}
                 time={30000}
+                cookie={cookie}
                 words={shuffledWords}
             />
         </div>
