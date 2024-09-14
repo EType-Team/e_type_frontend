@@ -55,9 +55,7 @@ const Study = ({
                 />
             )}
             {isActive === 1 && onEnd === 1 && (
-                <ResultCard
-                    cookie={cookie}
-                />
+                <ResultCard />
             )}
         </>
     )
