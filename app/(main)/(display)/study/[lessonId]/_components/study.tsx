@@ -21,6 +21,7 @@ interface StudyProps {
 const Study = ({
     label,
     time,
+    cookie,
     words
 }: StudyProps) => {
     const [isActive, setIsActive] = useState(0)
@@ -42,6 +43,7 @@ const Study = ({
             {isActive === 1 && onEnd === 0 && (
                 <PlayCard
                     words={words}
+                    cookie={cookie}
                 />
             )}
             {isActive === 1 && onEnd === 1 && (
