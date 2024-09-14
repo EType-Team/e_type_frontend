@@ -9,6 +9,7 @@ import ResultCard from "./result-card"
 interface StudyProps {
     label: string
     time: number
+    cookie: string
     words: {
         id: number
         english: string
