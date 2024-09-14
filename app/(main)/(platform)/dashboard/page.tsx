@@ -1,7 +1,9 @@
-import { List } from "lucide-react"
-import ProgressCard from "./_components/progress-card"
+import { KeyboardMusic, List } from "lucide-react"
 import { cookies } from "next/headers"
 import { UserWordProgress } from "@/types"
+import TotalTypingCard from "./_components/total-typing-card"
+import WordProgressTable from "./_components/word-progress-table"
+import { columns } from "./_components/columns"
 
 const DashboardPage = async () => {
     const cookie = cookies().toString()
@@ -10,14 +12,21 @@ const DashboardPage = async () => {
         cache: "no-store"
     })
     const userWordProgress: UserWordProgress[] = await userWordProgressData.json()
+    const totalTypingNum = userWordProgress.reduce((sum, item) => sum + item.total_typings, 0);
     const sortedUserWordProgress = userWordProgress.sort((a, b) => b.proficiency - a.proficiency);
 
     return (
-        <div className="p-8">
-            <ProgressCard
-                icon={List}
-                userWordProgresses={sortedUserWordProgress}
+        <div className="p-8 flex">
+            <WordProgressTable
+                columns={columns}
+                data={userWordProgress}
             />
+            <div className="ml-10">
+                <TotalTypingCard
+                    icon={KeyboardMusic}
+                    totalTypingNum={totalTypingNum}
+                />
+            </div>
         </div>
     )
 }
