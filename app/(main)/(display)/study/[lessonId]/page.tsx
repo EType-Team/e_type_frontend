@@ -33,7 +33,7 @@ const StudyLessonIdPage = async ({
     const shuffledWords = shuffleArray(words)
 
     return ( 
-        <div className="relative flex flex-col items-center gap-y-52">
+        <div className="relative flex flex-col items-center gap-y-44">
             <Study
                 label={lesson.title}
                 time={30000}
