@@ -1,9 +1,11 @@
 'use client'
 
+import { handleCurrectTyping } from "@/data/userWordProgress"
 import { cn } from "@/lib/utils"
 import { useEffect, useRef, useState } from "react"
 
 interface PlayCardProps {
+    cookie: string
     words: {
         id: number
         english: string
@@ -13,6 +15,7 @@ interface PlayCardProps {
 }
 
 const PlayCard = ({
+    cookie,
     words
 }: PlayCardProps) => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -20,7 +23,7 @@ const PlayCard = ({
     const [correct, setCorrect] = useState(false)
     const inputRef = useRef("")
 
-    const handleKeyPress = (e: KeyboardEvent) => {
+    const handleKeyPress = async (e: KeyboardEvent) => {
         if (e.key.length > 1) return
 
         inputRef.current += e.key
@@ -42,6 +45,7 @@ const PlayCard = ({
             })
             if (newInput === targetText) {
                 setCorrect(true)
+                await handleCurrectTyping(words[currentIndex].id, cookie)
                 setTimeout(() => {
                     setCurrentIndex((current) => current + 1)
                     setCorrect(false)
