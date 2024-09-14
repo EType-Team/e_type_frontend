@@ -2,6 +2,7 @@
 
 import { handleCurrectTyping } from "@/data/userWordProgress"
 import { cn } from "@/lib/utils"
+import { useTypingStore } from "@/store/typing-store"
 import { useEffect, useRef, useState } from "react"
 
 interface PlayCardProps {
@@ -22,6 +23,8 @@ const PlayCard = ({
     const [status, setStatus] = useState<string[]>([])
     const [correct, setCorrect] = useState(false)
     const inputRef = useRef("")
+
+    const addCompletedWordId = useTypingStore((state) => state.addCompletedWordId);
 
     const handleKeyPress = async (e: KeyboardEvent) => {
         if (e.key.length > 1) return
@@ -46,6 +49,7 @@ const PlayCard = ({
             if (newInput === targetText) {
                 setCorrect(true)
                 await handleCurrectTyping(words[currentIndex].id, cookie)
+                addCompletedWordId(words[currentIndex].id);
                 setTimeout(() => {
                     setCurrentIndex((current) => current + 1)
                     setCorrect(false)
