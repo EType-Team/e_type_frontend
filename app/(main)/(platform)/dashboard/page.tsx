@@ -13,8 +13,11 @@ const DashboardPage = async () => {
     const sortedUserWordProgress = userWordProgress.sort((a, b) => b.proficiency - a.proficiency);
 
     return (
-        <div>
-            ダッシュボードページ
+        <div className="p-8">
+            <ProgressCard
+                icon={List}
+                userWordProgresses={sortedUserWordProgress}
+            />
         </div>
     )
 }
