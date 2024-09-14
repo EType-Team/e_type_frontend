@@ -2,6 +2,7 @@ export type UserWordProgress = {
     id: number
     user_id: number
     word_id: number
+    word: Word
     total_typings: number
     typing_speed: number
     proficiency: number
