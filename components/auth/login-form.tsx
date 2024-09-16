@@ -4,7 +4,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 
 const LoginForm = () => {
     const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:8080/api/auth/google/login';
+        window.location.href = process.env.GOOGLE_AUTH_URL || ""
     };
     return (
         <CardWrapper
