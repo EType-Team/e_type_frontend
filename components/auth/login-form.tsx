@@ -1,11 +1,11 @@
 "use client"
 
-import { CardWrapper } from "@/components/auth/card-wrapper";
+import { CardWrapper } from "@/components/auth/card-wrapper"
 
 const LoginForm = () => {
     const handleGoogleLogin = () => {
-        window.location.href = process.env.GOOGLE_AUTH_URL || ""
-    };
+        window.location.href = `${process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL}`
+    }
     return (
         <CardWrapper
             headerLabel="おかえりなさい！"
@@ -34,4 +34,4 @@ const LoginForm = () => {
     );
 }
 
-export default LoginForm;
+export default LoginForm
