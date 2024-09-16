@@ -6,6 +6,7 @@ export const getUser = async (): Promise<User | null> => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
             headers: { Cookie: cookies().toString() },
             method: "GET",
+            cache: "no-store"
         })
         if (!response.ok) {
           throw new Error("ユーザー情報の取得に失敗しました。");
@@ -15,5 +16,5 @@ export const getUser = async (): Promise<User | null> => {
     } catch (err) {
         return null
     }
-  }
+}
   
