@@ -4,6 +4,7 @@ import "./globals.css"
 import { cn } from "@/lib/utils"
 import CsrfProvider from "@/components/csrf-provider"
 import QueryClientNextProvider from "@/components/query-client-next-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 const fontSans = FontSans({
   subsets: ["latin"],
