@@ -13,7 +13,6 @@ const DashboardPage = async () => {
     })
     const userWordProgress: UserWordProgress[] = await userWordProgressData.json()
     const totalTypingNum = userWordProgress.reduce((sum, item) => sum + item.total_typings, 0);
-    const sortedUserWordProgress = userWordProgress.sort((a, b) => b.proficiency - a.proficiency);
 
     return (
         <div className="p-8 flex">
