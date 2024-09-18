@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 
 export const getUser = async (): Promise<User | null> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
             headers: { Cookie: cookies().toString() },
             method: "GET",
             cache: "no-store"
