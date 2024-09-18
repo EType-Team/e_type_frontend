@@ -1,3 +1,26 @@
+import { UserWordProgress } from "@/types";
+
+export const getUserWordProgresses = async (token?: string): Promise<UserWordProgress[] | false> => {
+    try {
+        if (!token) {
+            return false
+        }
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses`, {
+            headers: {
+                'Cookie': `token=${token}`
+            },
+            cache: 'no-cache'
+        })
+        if (!response.ok) {
+            return false
+        }
+        const data: UserWordProgress[] = await response.json()
+        return data
+    } catch (err) {
+        return false
+    }
+}
+
 export const handleCurrectTyping = async (wordId: number, cookies: string) => {
     try {
         if (!cookies) {
