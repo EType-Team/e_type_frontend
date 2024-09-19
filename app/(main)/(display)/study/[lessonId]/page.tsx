@@ -1,6 +1,5 @@
 import { cookies } from "next/headers"
 import Study from "./_components/study"
-import { LessonWord } from "@/types"
 import { getLessonById } from "@/data/lesson";
 import { getLessonWordsByLessonId } from "@/data/lessonWord";
 
