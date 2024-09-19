@@ -26,11 +26,13 @@ import { useState } from "react"
 interface WordProgressTableProps {
     columns: ColumnDef<UserWordProgress>[]
     data: UserWordProgress[]
+    authError: boolean
 }
 
 const WordProgressTable = ({
     columns,
-    data
+    data,
+    authError
 }: WordProgressTableProps) => {
     const [sorting, setSorting] = useState<SortingState>([])
     const table = useReactTable({
@@ -67,26 +69,35 @@ const WordProgressTable = ({
                     ))}
                 </TableHeader>
                 <TableBody>
-                {table.getRowModel().rows?.length ? (
-                    table.getRowModel().rows.map((row) => (
-                        <TableRow
-                        key={row.id}
-                        data-state={row.getIsSelected() && "selected"}
-                        >
-                        {row.getVisibleCells().map((cell) => (
-                            <TableCell key={cell.id}>
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {authError ? (
+                        <TableRow>
+                            <TableCell colSpan={columns.length} className="h-24 text-center">
+                                ログインで学習記録を残すことができます。
                             </TableCell>
-                        ))}
                         </TableRow>
-                    ))
-                    ) : (
-                    <TableRow>
-                        <TableCell colSpan={columns.length} className="h-24 text-center">
-                            学習記録がありません
-                        </TableCell>
-                    </TableRow>
-                )}
+                    ): (
+                        table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    data-state={row.getIsSelected() && "selected"}
+                                >
+                                {row.getVisibleCells().map((cell) => (
+                                    <TableCell key={cell.id}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </TableCell>
+                                ))}
+                                </TableRow>
+                            ))
+                            ) : (
+                            <TableRow>
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    学習記録がありません
+                                </TableCell>
+                            </TableRow>
+                        )
+                    )}
+
                 </TableBody>
             </Table>
         </div>

@@ -16,9 +16,9 @@ const ResultContent = ({
             <CardHeader>
                 <CardTitle className="text-center">結果</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center overflow-y-auto max-h-[250px] p-10">
+            <CardContent className="flex flex-col justify-center items-center">
                 <p>合計タイピング数</p>
-                <p>{totalTypingNum}</p>
+                <p className="text-2xl font-bold">{totalTypingNum}</p>
             </CardContent>
             <CardFooter className="justify-center">
                 <Button>
