@@ -31,7 +31,7 @@ export const handleCurrectTyping = async (wordId: number, cookies: string) => {
             throw new Error('認証情報がありません。')
         }
         const csrfToken = csrfCookie.split('=')[1]
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/userWordProgresses/incrementProgress`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses/incrementProgress`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
