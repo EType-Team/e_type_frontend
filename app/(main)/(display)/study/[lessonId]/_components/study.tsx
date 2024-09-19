@@ -6,6 +6,7 @@ import Timer from "./timer"
 import PlayCard from "./play-card"
 import ResultCard from "./result-card"
 import { useTypingStore } from "@/store/typing-store"
+import SoundToggle from "@/components/sound-toggle"
 
 interface StudyProps {
     label: string
@@ -57,6 +58,9 @@ const Study = ({
             {isActive === 1 && onEnd === 1 && (
                 <ResultCard />
             )}
+            <div className="absolute top-0 right-0 p-4">
+                <SoundToggle />
+            </div>
         </>
     )
 }
