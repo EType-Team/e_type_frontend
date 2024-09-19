@@ -2,6 +2,7 @@
 
 import { handleCurrectTyping } from "@/data/userWordProgress"
 import { cn } from "@/lib/utils"
+import { useSoundStore } from "@/store/sound-store"
 import { useTypingStore } from "@/store/typing-store"
 import { useEffect, useRef, useState } from "react"
 
@@ -24,7 +25,18 @@ const PlayCard = ({
     const [correct, setCorrect] = useState(false)
     const inputRef = useRef("")
 
-    const addCompletedWordId = useTypingStore((state) => state.addCompletedWordId);
+    const addCompletedWordId = useTypingStore((state) => state.addCompletedWordId)
+    const soundEnabled = useSoundStore((state) => state.soundEnabled)
+
+    const audioCache = useRef<Record<number, HTMLAudioElement>>({})
+
+    useEffect(() => {
+        words.forEach(word => {
+            const audio = new Audio(word.mp3Path)
+            audio.preload = "auto"
+            audioCache.current[word.id] = audio
+        })
+    }, [words])
 
     const handleKeyPress = async (e: KeyboardEvent) => {
         if (e.key.length > 1) return
@@ -42,14 +54,28 @@ const PlayCard = ({
             })
         } else {
             setStatus((prevStatus: string[]) => {
-                const newStatus = [...prevStatus];
-                newStatus[newInput.length - 1] = "green";
+                const newStatus = [...prevStatus]
+                newStatus[newInput.length - 1] = "green"
                 return newStatus
             })
             if (newInput === targetText) {
                 setCorrect(true)
-                await handleCurrectTyping(words[currentIndex].id, cookie)
-                addCompletedWordId(words[currentIndex].id);
+
+                // サウンドが有効な場合にキャッシュされた音声を再生
+                if (soundEnabled && audioCache.current[words[currentIndex].id]) {
+                    audioCache.current[words[currentIndex].id].currentTime = 0 // 再生位置をリセット
+                    audioCache.current[words[currentIndex].id].play().catch((error) => {
+                        console.error("音声の再生中にエラーが発生しました:", error)
+                    })
+                }
+
+                // handleCurrectTyping を非同期で呼び出し
+                handleCurrectTyping(words[currentIndex].id, cookie).then(() => {
+                    addCompletedWordId(words[currentIndex].id);
+                }).catch(error => {
+                    console.error("handleCurrectTyping 中にエラーが発生しました:", error)
+                })
+
                 setTimeout(() => {
                     setCurrentIndex((current) => current + 1)
                     setCorrect(false)
@@ -88,5 +114,5 @@ const PlayCard = ({
         </div>
     )
 }
- 
+
 export default PlayCard
