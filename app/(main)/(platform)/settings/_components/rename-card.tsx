@@ -48,7 +48,7 @@ const RenameCard = ({ username, label }: RenameCardProps) => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/update`, values)
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/update`, values)
 
             if (!response) {
                 toast("ユーザー名が更新できませんでした。")
