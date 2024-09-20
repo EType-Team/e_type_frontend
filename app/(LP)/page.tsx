@@ -8,7 +8,8 @@ export default async function Home() {
                 src="/etype-lp.png"
                 alt="etype-lp"
                 width={500}
-                height={0}
+                height={500}
+                className="object-contain"
             />
             <p className="text-2xl m-4 font-semibold">
                 新しい学習体験
