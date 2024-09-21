@@ -1,5 +1,6 @@
 'use client';
 
+import LoadingNavigateButton from "@/components/loading-navigate-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
@@ -21,11 +22,12 @@ const ResultContent = ({
                 <p className="text-2xl font-bold">{totalTypingNum}</p>
             </CardContent>
             <CardFooter className="justify-center">
-                <Button>
-                    <Link href="/lesson">
-                        レッスン一覧
-                    </Link>
-                </Button>
+                <LoadingNavigateButton
+                    variant="outline"
+                    url="/lesson"
+                    label="レッスン一覧に戻る"
+                    loadingLabel="読み込み中..."
+                />
             </CardFooter>
         </Card>
     );
