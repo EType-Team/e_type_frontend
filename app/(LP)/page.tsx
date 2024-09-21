@@ -1,5 +1,5 @@
+import LoadingNavigateButton from "@/components/loading-navigate-button"
 import Image from "next/image"
-import StartButton from "./_components/start-button"
 
 export default async function Home() {
     return (
@@ -14,7 +14,12 @@ export default async function Home() {
             <p className="text-2xl m-4 font-semibold">
                 新しい学習体験
             </p>
-            <StartButton />
+            <LoadingNavigateButton
+                variant="outline"
+                url="/dashboard"
+                label="はじめる"
+                loadingLabel="読み込み中..."
+            />
         </div>
     )
 }
