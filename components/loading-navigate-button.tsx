@@ -24,7 +24,11 @@ const LoadingNavigateButton = ({
     const handlePush = () => {
         setLoading(true)
         router.push(url)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
     }
+
     return (
         <Button
             variant={variant}
