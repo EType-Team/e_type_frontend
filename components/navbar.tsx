@@ -1,8 +1,7 @@
+import LoadingNavigateButton from "@/components/loading-navigate-button"
 import Logo from "@/components/logo"
-import UserAvatar from "./user-avatar"
+import UserAvatar from "@/components/user-avatar"
 import { getUser } from "@/data/user"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
 
 const Navbar = async () => {
     const user = await getUser()
@@ -15,13 +14,12 @@ const Navbar = async () => {
                     image={user?.image}
                 />
             ): (
-                <Button>
-                    <Link
-                        href="/auth/login"
-                    >
-                        ログイン
-                    </Link>
-                </Button>
+                <LoadingNavigateButton
+                    variant="outline"
+                    url="/auth/login"
+                    label="ログイン"
+                    loadingLabel="読み込み中..."
+                />
             )}
         </div>
     )

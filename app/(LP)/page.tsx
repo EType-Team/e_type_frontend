@@ -4,13 +4,13 @@ import LoadingNavigateButton from "@/components/loading-navigate-button"
 export default function Home() {
     return (
         <div>
-            
+
             <div className="flex flex-col h-screen bg-gradient-to-b from-white to-blue-300 text-black">
                 <header className="flex justify-between items-center p-6">
                     <h1 className="text-4xl font-bold"></h1>
                     <nav>
                         <ul className="flex space-x-6">
-                            
+
                         </ul>
                     </nav>
                 </header>
@@ -26,7 +26,7 @@ export default function Home() {
                         />
                         <h2 className="text-3xl font-extrabold mb-4">新しい学習体験</h2>
                         <p className="text-xl mb-8"></p>
-                        
+
                         <div className="flex justify-center">
                             <LoadingNavigateButton
                                 variant="outline"

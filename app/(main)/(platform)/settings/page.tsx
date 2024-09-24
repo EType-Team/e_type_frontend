@@ -8,12 +8,12 @@ const SettingsPage = async () => {
         <>
             {user ? (
                 <div className="p-8 flex">
-                    <LogoutCard
-                        label="logout"
-                    />
                     <RenameCard
                         username={user?.name!}
                         label="rename"
+                    />
+                    <LogoutCard
+                        label="logout"
                     />
                 </div>
             ) : (

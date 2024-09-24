@@ -108,7 +108,7 @@ const PlayCard = ({
                     </span>
                 ))}
             </p>
-            <p className="text-2xl">
+            <p className="text-2xl mt-2 font-semibold">
                 {correct && words[currentIndex].japanese}
             </p>
         </div>
