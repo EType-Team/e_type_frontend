@@ -4,7 +4,6 @@ import LoadingNavigateButton from "@/components/loading-navigate-button"
 export default function Home() {
     return (
         <div>
-
             <div className="flex flex-col h-screen bg-gradient-to-b from-white to-blue-300 text-black">
                 <header className="flex justify-between items-center p-6">
                     <h1 className="text-4xl font-bold"></h1>
