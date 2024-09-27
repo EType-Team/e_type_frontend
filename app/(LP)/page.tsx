@@ -23,6 +23,7 @@ export default function Home() {
                             width={500}
                             height={500}
                             className="object-contain mb-8 drop-shadow-lg"
+                            priority={true}
                         />
                         <h2 className="text-3xl font-extrabold mb-4">新しい学習体験</h2>
                         <p className="text-xl mb-8"></p>
