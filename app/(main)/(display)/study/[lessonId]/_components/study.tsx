@@ -68,7 +68,9 @@ const Study = ({
                 />
             )}
             {(isActive === 1 || isActive === 2) && onEnd === 1 && (
-                <ResultCard />
+                <ResultCard
+                    resultType={isActive}
+                />
             )}
             <div className="absolute top-0 right-0 p-4">
                 <SoundToggle />
