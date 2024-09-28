@@ -8,6 +8,7 @@ import ResultCard from "./result-card"
 import { useTypingStore } from "@/store/typing-store"
 import SoundToggle from "@/components/sound-toggle"
 import TestCard from "./test-card"
+import { useTestTypingStore } from "@/store/test-typing-store"
 
 interface StudyProps {
     label: string
@@ -29,14 +30,16 @@ const Study = ({
 }: StudyProps) => {
     const [isActive, setIsActive] = useState(0)
     const [onEnd, setOnEnd] = useState(0)
-    const resetCompletedWords = useTypingStore((state) => state.resetCompletedWords);
+    const resetCompletedWords = useTypingStore((state) => state.resetCompletedWords)
+    const resetTestTypingStore = useTestTypingStore((state) => state.resetTestTypingStore)
 
     const handleStart = () => {
-        resetCompletedWords();
-        setIsActive(1);
+        resetCompletedWords()
+        setIsActive(1)
     }
 
     const handleTest = () => {
+        resetTestTypingStore()
         setIsActive(2)
     }
     
