@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { useSoundStore } from "@/store/sound-store"
+import { useTestTypingStore } from "@/store/test-typing-store"
 import { useEffect, useRef, useState } from "react"
 
 interface TestCardProps {
@@ -20,6 +21,9 @@ const TestCard = ({
     const [inputValue, setInputValue] = useState("")
     const [correct, setCorrect] = useState<boolean>()
     const [ansWord, setAnsWord] = useState("")
+
+    const addCorrectWordId = useTestTypingStore((state) => state.addCorrectWordId)
+    const addNotCorrectWordId = useTestTypingStore((state) => state.addNotCorrectWordId)
 
     const soundEnabled = useSoundStore((state) => state.soundEnabled)
     const audioCache = useRef<Record<number, HTMLAudioElement>>({})
@@ -54,9 +58,12 @@ const TestCard = ({
             if (words[currentIndex].english !== inputValue) {
                 setCorrect(false)
                 setAnsWord(words[currentIndex].english)
+
+                addNotCorrectWordId(words[currentIndex].id)
             } else {
                 setCorrect(true)
                 // Data fetch API
+                addCorrectWordId(words[currentIndex].id)
             }
 
             setTimeout(() => {
