@@ -3,8 +3,15 @@
 import { useEffect, useState } from "react"
 import ResultContent from "./result-content"
 import { useTypingStore } from "@/store/typing-store"
+import ResultTestContent from "./result-test-content"
 
-const ResultCard = () => {
+interface ResultCardProps {
+    resultType: number
+}
+
+const ResultCard = ({
+    resultType
+}: ResultCardProps) => {
     const [isResult, setIsResult] = useState(false)
     const completedWordIds = useTypingStore((state) => state.completedWordIds);
     const totalTypingNum = completedWordIds.length
@@ -16,9 +23,13 @@ const ResultCard = () => {
     return (
         <>
             {isResult ? (
-                <ResultContent
-                    totalTypingNum={totalTypingNum}
-                />
+                resultType === 1 ? (
+                    <ResultContent
+                        totalTypingNum={totalTypingNum}
+                    />
+                ) : resultType === 2 ? (
+                    <ResultTestContent />
+                ) : null
             ) : (
                 <p className="text-3xl font-semibold">
                     終了！
