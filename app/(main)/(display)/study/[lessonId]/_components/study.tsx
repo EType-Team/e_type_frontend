@@ -7,6 +7,7 @@ import PlayCard from "./play-card"
 import ResultCard from "./result-card"
 import { useTypingStore } from "@/store/typing-store"
 import SoundToggle from "@/components/sound-toggle"
+import TestCard from "./test-card"
 
 interface StudyProps {
     label: string
@@ -34,12 +35,16 @@ const Study = ({
         resetCompletedWords();
         setIsActive(1);
     }
+
+    const handleTest = () => {
+        setIsActive(2)
+    }
     
     return (
         <>
             <Timer 
                 time={time}
-                isActive={isActive === 1}
+                isActive={isActive === 1 || isActive === 2}
                 onEnd={() => setOnEnd(1)}
             />
             {isActive === 0 && onEnd === 0 && (
@@ -47,6 +52,7 @@ const Study = ({
                     label={label}
                     time={time}
                     onStart={handleStart}
+                    onTest={handleTest}
                 />
             )}
             {isActive === 1 && onEnd === 0 && (
@@ -55,7 +61,13 @@ const Study = ({
                     cookie={cookie}
                 />
             )}
-            {isActive === 1 && onEnd === 1 && (
+            {isActive === 2 && onEnd === 0 && (
+                <TestCard
+                    words={words}
+                    cookie={cookie}
+                />
+            )}
+            {(isActive === 1 || isActive === 2) && onEnd === 1 && (
                 <ResultCard />
             )}
             <div className="absolute top-0 right-0 p-4">
