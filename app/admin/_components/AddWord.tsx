@@ -11,20 +11,22 @@ interface AddWordProps {
 const AddWord: React.FC<AddWordProps> = ({ lessonId, setWordList, fetchWords }) => {
     const [english, setEnglish] = useState('');
     const [japanese, setJapanese] = useState('');
-    const [mp3Path, setMp3Path] = useState('');
     const { addNewWordToLesson } = useLesson();
     const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
+        
+        // mp3Path を英語の単語を基に自動生成
+        const mp3Path = `/audio/${english}.mp3`;
+
         try {
             const newWord = await addNewWordToLesson(lessonId, { english, japanese, mp3_path: mp3Path });
             if (newWord) {
                 setWordList(prevWords => [...prevWords, newWord]);
                 setEnglish('');
                 setJapanese('');
-                setMp3Path('');
                 await fetchWords(); // 新しい単語を追加した後に単語リストを再取得
             } else {
                 setError('Failed to add the word');
@@ -52,14 +54,7 @@ const AddWord: React.FC<AddWordProps> = ({ lessonId, setWordList, fetchWords }) 
                 placeholder="Japanese"
                 className="border p-2 mb-2 w-full"
             />
-            <input
-                type="text"
-                value={mp3Path}
-                onChange={(e) => setMp3Path(e.target.value)}
-                placeholder="MP3 Path"
-                className="border p-2 mb-2 w-full"
-            />
-            <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+            <button type="submit" className=" px-2 py-1 border">
                 Add Word
             </button>
         </form>
