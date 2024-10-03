@@ -83,14 +83,13 @@ const WordProgressTable = ({
       <div>
         <div className="rounded-md border shadow-sm">
             <div className="flex items-center px-4 pt-4">
-                <label htmlFor="lesson-select" className="mr-2 text-sm">レッスンを選択:</label>
                 <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild>
                         <Button
                             variant="outline"
                             role="conbobox"
                             aria-expanded={open}
-                            className="w-[400px] justify-between"
+                            className="w-[600px] justify-between"
                         >
                             {value
                                 ? lessons.find((lesson) => lesson.title === value)?.title
@@ -98,7 +97,7 @@ const WordProgressTable = ({
                             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-[400px] p-0">
+                    <PopoverContent className="w-[600px] p-0">
                         <Command>
                             <CommandList>
                                 <CommandGroup>
