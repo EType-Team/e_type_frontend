@@ -1,9 +1,9 @@
 import { UserWordProgress } from "@/types";
 
-export const getUserWordProgresses = async (token?: string): Promise<UserWordProgress[] | false> => {
+export const getUserWordProgresses = async (token?: string): Promise<UserWordProgress[] | null> => {
     try {
         if (!token) {
-            return false
+            return null
         }
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses`, {
             headers: {
@@ -12,12 +12,12 @@ export const getUserWordProgresses = async (token?: string): Promise<UserWordPro
             cache: 'no-cache'
         })
         if (!response.ok) {
-            return false
+            return null
         }
         const data: UserWordProgress[] = await response.json()
         return data
     } catch (err) {
-        return false
+        return null
     }
 }
 
