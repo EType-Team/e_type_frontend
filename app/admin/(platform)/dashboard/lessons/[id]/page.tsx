@@ -86,7 +86,7 @@ const LessonDetail: React.FC = () => {
             
             <button
                 onClick={handleDelete}
-                className="mt-4 bg-black text-white px-4 py-2 rounded"
+                className=" px-2 py-1 border"
             >
                 レッスンを削除
             </button>

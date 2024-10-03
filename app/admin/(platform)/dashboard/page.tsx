@@ -14,11 +14,11 @@ const DashboardPage = async () => {
                 </Card>
             </Link>
 
-            <Link href="/admin/dashboard/english-words">
+            <Link href="/admin/dashboard/lessons">
                 <Card className="w-60 m-2 hover:shadow-md cursor-pointer flex flex-col items-center">
                     <SquarePen className="m-4" />
                     <CardHeader>
-                        <CardTitle>英単語</CardTitle>
+                        <CardTitle>レッスン一覧</CardTitle>
                     </CardHeader>
                 </Card>
             </Link>
