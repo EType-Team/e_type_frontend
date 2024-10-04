@@ -1,3 +1,4 @@
+import { handleCurrectTestTyping } from "@/data/userWordProgress"
 import { cn } from "@/lib/utils"
 import { useSoundStore } from "@/store/sound-store"
 import { useTestTypingStore } from "@/store/test-typing-store"
@@ -58,11 +59,11 @@ const TestCard = ({
             if (words[currentIndex].english !== inputValue) {
                 setCorrect(false)
                 setAnsWord(words[currentIndex].english)
-
+                await handleCurrectTestTyping(words[currentIndex].id, cookie, false)
                 addNotCorrectWordId(words[currentIndex].id)
             } else {
                 setCorrect(true)
-                // Data fetch API
+                await handleCurrectTestTyping(words[currentIndex].id, cookie, true)
                 addCorrectWordId(words[currentIndex].id)
             }
 

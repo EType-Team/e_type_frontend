@@ -24,14 +24,14 @@ export const getUserWordProgresses = async (token?: string): Promise<UserWordPro
 export const handleCurrectTyping = async (wordId: number, cookies: string) => {
     try {
         if (!cookies) {
-            throw new Error('認証情報がありません。')
+            return
         }
         const csrfCookie = cookies.split('; ').find(row => row.startsWith('_csrf='));
         if (!csrfCookie) {
-            throw new Error('認証情報がありません。')
+            return
         }
         const csrfToken = csrfCookie.split('=')[1]
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses/incrementProgress`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses/incrementProgress`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,11 +43,35 @@ export const handleCurrectTyping = async (wordId: number, cookies: string) => {
                 word_id: wordId
             }),
         })
-
-        if (!response.ok) {
-            throw new Error('リクエストが失敗しました')
-        }
     } catch (error) {
-        console.error("進捗の更新中にエラーが発生しました:", error);
+        return
     }
 }
+
+export const handleCurrectTestTyping = async (wordId: number, cookies: string, isCorrect: boolean) => {
+    try {
+        if (!cookies) {
+            return
+        }
+        const csrfCookie = cookies.split('; ').find(row => row.startsWith('_csrf='));
+        if (!csrfCookie) {
+            return
+        }
+        const csrfToken = csrfCookie.split('=')[1]
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses/incrementTestProgress`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Cookies: cookies,
+                'X-CSRF-token': csrfToken
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                word_id: wordId,
+                is_correct: isCorrect
+            }),
+        })
+    } catch (error) {
+        return null
+    }
+} 
