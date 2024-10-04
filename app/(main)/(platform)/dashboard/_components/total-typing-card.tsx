@@ -1,29 +1,37 @@
+"use client"
+
 import {
     Card,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { LucideIcon } from "lucide-react";
+import { UserWordProgress } from "@/types"
+import { KeyboardMusic } from "lucide-react"
 
 interface TotalTypingCardProps {
-    icon: LucideIcon
-    totalTypingNum: number
+    userWordProgresses: UserWordProgress[] | null
 }
 
 const TotalTypingCard = ({
-    icon: Icon,
-    totalTypingNum
+    userWordProgresses
 }: TotalTypingCardProps) => {
+    let output
+    if (!userWordProgresses) {
+        output = 'データがありません。'
+    } else {
+        output = userWordProgresses.reduce((sum, item) => sum + item.total_typings, 0)
+    }
+        
     return (
         <Card 
-        className="w-[200px] flex flex-col items-center"
-    >
-        <Icon className="m-4" />
-        <CardHeader>
-            <CardTitle>{totalTypingNum}</CardTitle>
-        </CardHeader>
-    </Card>
-    );
+            className="w-[200px] flex flex-col items-center"
+        >
+            <KeyboardMusic className="m-4" />
+            <CardHeader>
+                <CardTitle>{output}</CardTitle>
+            </CardHeader>
+        </Card>
+    )
 }
- 
-export default TotalTypingCard;
+
+export default TotalTypingCard

@@ -1,17 +1,19 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { UserWordProgress } from "@/types"
-
+import { cn } from "@/lib/utils"
+import { Lesson, UserWordProgress} from "@/types"
+import { User } from "@/types/user"
 import {
     ColumnDef,
     SortingState,
@@ -21,22 +23,52 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table"
+import { Check, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 
 interface WordProgressTableProps {
     columns: ColumnDef<UserWordProgress>[]
     data: UserWordProgress[]
-    authError: boolean
+    lessons: Lesson[]
+    token?: string 
+    user: User | null
 }
 
 const WordProgressTable = ({
     columns,
     data,
-    authError
+    lessons,
+    user,
+    token
 }: WordProgressTableProps) => {
     const [sorting, setSorting] = useState<SortingState>([])
+    const [open, setOpen] = useState(false)
+    const [value, setValue] = useState("")
+    const [tableData, setTableData] = useState<UserWordProgress[]>(data);
+    
+    const handleGetUserWordProgressesByLessonId = async (lessonId: number) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userWordProgresses/${lessonId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': `token=${token}`
+                },
+                cache: 'no-cache',
+                credentials: 'include'
+            })
+            if (response.ok) {
+                const userWordProgress = await response.json()
+                setTableData(userWordProgress);
+            } else {
+                setTableData([]);
+            }
+        } catch {
+            setTableData([]);
+        }
+    }
+
     const table = useReactTable({
-        data,
+        data: tableData,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -46,9 +78,54 @@ const WordProgressTable = ({
             sorting,
         },
     })
+
     return (
       <div>
         <div className="rounded-md border shadow-sm">
+            <div className="flex items-center px-4 pt-4">
+                <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                        <Button
+                            variant="outline"
+                            role="conbobox"
+                            aria-expanded={open}
+                            className="w-[600px] justify-between"
+                        >
+                            {value
+                                ? lessons.find((lesson) => lesson.title === value)?.title
+                                : "レッスンを選択してください"}
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[600px] p-0">
+                        <Command>
+                            <CommandList>
+                                <CommandGroup>
+                                    {lessons.map((lesson) => (
+                                        <CommandItem
+                                            key={lesson.id}
+                                            value={lesson.title}
+                                            onSelect={(currentValue) => {
+                                                setValue(currentValue === value ? "" : currentValue)
+                                                setOpen(false)
+                                                handleGetUserWordProgressesByLessonId(lesson.id)
+                                            }}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    value === lesson.title ? "opacity-100" : "opacity-0"
+                                                )}
+                                            />
+                                            {lesson.title}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
+            </div>
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -69,7 +146,7 @@ const WordProgressTable = ({
                     ))}
                 </TableHeader>
                 <TableBody>
-                    {authError ? (
+                    {!user ? (
                         <TableRow>
                             <TableCell colSpan={columns.length} className="h-24 text-center">
                                 ログインで学習記録を残すことができます。
@@ -101,7 +178,7 @@ const WordProgressTable = ({
                 </TableBody>
             </Table>
         </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex items-center justify-end space-x-2 py-1">
             <Button
             variant="outline"
             size="sm"
