@@ -7,7 +7,7 @@ const LessonPage = async () => {
     return (
         <>
             {lessons ? (
-                <div className="p-8">
+                <div className="p-8 flex gap-10">
                     {lessons.map((lesson) => (
                     <LessonCard
                         key={lesson.id}

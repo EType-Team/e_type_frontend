@@ -1,15 +1,15 @@
 import { Lesson } from "@/types"
 
-export const getLessons = async (): Promise<Lesson[] | false> => {
+export const getLessons = async (): Promise<Lesson[] | null> => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lessons`)
         if (!response.ok) {
-            return false
+            return null
         }
         const data: Lesson[] = await response.json()
         return data
     } catch (err) {
-        return false
+        return null
     }
 }
 
