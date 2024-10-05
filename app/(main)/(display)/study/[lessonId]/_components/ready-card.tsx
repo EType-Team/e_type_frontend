@@ -6,12 +6,14 @@ interface ReadyCardProps {
     label: string
     time: number
     onStart: () => void
+    onTest: () => void
 }
 
 const ReadyCard = ({
     label,
     time,
-    onStart
+    onStart,
+    onTest
 }: ReadyCardProps) => {
     return ( 
         <div className="flex flex-col items-center gap-y-10">
@@ -23,6 +25,14 @@ const ReadyCard = ({
             >
                 スタート
             </Button>
+            <div className="mt-4">
+                <Button
+                    onClick={onTest}
+                    variant='outline'
+                >
+                    テストをはじめる
+                </Button>
+            </div>
         </div>
     )
 }
