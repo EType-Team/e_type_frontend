@@ -1,5 +1,6 @@
 import Image from "next/image"
 import LoadingNavigateButton from "@/components/loading-navigate-button"
+import Footer from "@/components/footer"
 
 export default function Home() {
     return (
@@ -38,6 +39,7 @@ export default function Home() {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </div>
         </div>
     )
