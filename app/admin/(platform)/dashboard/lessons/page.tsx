@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import useLesson from '@/app/admin/_data/useLesson';
+import useLesson from '@/data/useLesson';
 import { Lesson } from '@/types';
 
 const LessonList = () => {
@@ -22,8 +22,8 @@ const LessonList = () => {
         fetchLessons();
     }, []);
 
-    const handleLessonClick = (id: number) => {
-        router.push(`/admin/dashboard/lessons/${id}`);
+    const handleLessonClick = (lessonId: number) => {
+        router.push(`/admin/dashboard/lessons/${lessonId}`);
     };
 
     return (

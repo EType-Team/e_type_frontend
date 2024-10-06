@@ -1,5 +1,5 @@
 import React from 'react';
-import useLesson from '../_data/useLesson';
+import useLesson from '@/data/useLesson';
 import { Word } from '@/types';
 
 interface WordListProps {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useLesson from '@/app/admin/_data/useLesson';
+import useLesson from '@/data/useLesson';
 import { Lesson } from '@/types';
 import { toast } from 'sonner';
 
