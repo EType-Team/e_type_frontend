@@ -22,6 +22,7 @@ const TestCard = ({
     const [inputValue, setInputValue] = useState("")
     const [correct, setCorrect] = useState<boolean>()
     const [ansWord, setAnsWord] = useState("")
+    const [isKeyDisabled, setIsKeyDisabled] = useState(false)
 
     const addCorrectWordId = useTestTypingStore((state) => state.addCorrectWordId)
     const addNotCorrectWordId = useTestTypingStore((state) => state.addNotCorrectWordId)
@@ -44,12 +45,14 @@ const TestCard = ({
     })
 
     const handleKeyPress = async (e: KeyboardEvent) => {
+        if (isKeyDisabled) return;
         const keyValue = e.key.valueOf()
         if (keyValue == 'Backspace') {
             setInputValue(prev => prev.slice(0, -1))
         }
 
         if (keyValue == 'Enter') {
+            setIsKeyDisabled(true);
             if (soundEnabled && audioCache.current[words[currentIndex].id]) {
                 audioCache.current[words[currentIndex].id].currentTime = 0
                 audioCache.current[words[currentIndex].id].play().catch((error) => {
@@ -71,7 +74,8 @@ const TestCard = ({
                 setCurrentIndex((current) => current + 1)
                 setAnsWord("")
                 setInputValue("")
-                setCorrect(undefined) 
+                setCorrect(undefined)
+                setIsKeyDisabled(false);
             }, 1000)
         }
 
