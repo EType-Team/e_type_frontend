@@ -17,7 +17,7 @@ const Footer = () => {
                         </Link>
                     </ul>
                 </div>
-                <div className="text-center mt-4 md:mt-0">
+                <div className="text-center text-sm mt-4 md:mt-0">
                     <p>&copy; 2024 EType. All rights reserved.</p>
                 </div>
             </div>
