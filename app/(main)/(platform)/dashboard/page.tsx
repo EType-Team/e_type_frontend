@@ -16,7 +16,7 @@ const DashboardPage = async () => {
     const lessons = await getLessons()
 
     return (
-        <>
+        <div className="min-h-screen relative">
             <div className="p-8 flex">
                 <WordProgressTable
                     columns={columns}
@@ -31,8 +31,10 @@ const DashboardPage = async () => {
                     />
                 </div>
             </div>
-            <Footer />
-        </>
+            <div className="absolute w-full bottom-0">
+                <Footer />
+            </div>
+        </div>
     )
 }
  
