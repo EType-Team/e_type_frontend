@@ -1,3 +1,4 @@
+import Footer from "@/components/footer"
 import LPDisplayNavbar from "@/components/lp-display-Navbar"
 
 const LPDisplayLayout = ({
@@ -13,6 +14,7 @@ const LPDisplayLayout = ({
             <div className="pt-[70px]">
                 {children}
             </div>
+            <Footer />
         </div>
     )
 }
