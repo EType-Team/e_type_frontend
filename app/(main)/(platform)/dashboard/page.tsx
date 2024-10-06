@@ -6,6 +6,7 @@ import { getUserWordProgresses } from "@/data/userWordProgress"
 import { getLessons } from "@/data/lesson"
 import { getUser } from "@/data/user"
 import Footer from "@/components/footer"
+import { cn } from "@/lib/utils"
 
 const DashboardPage = async () => {
     const cookieStore = cookies()
@@ -16,7 +17,10 @@ const DashboardPage = async () => {
     const lessons = await getLessons()
 
     return (
-        <div className="min-h-screen relative">
+        <div className={cn(
+            "h-screen relative",
+            userWordProgresses && "h-full"
+        )}>
             <div className="p-8 flex">
                 <WordProgressTable
                     columns={columns}
@@ -31,7 +35,9 @@ const DashboardPage = async () => {
                     />
                 </div>
             </div>
-            <div className="absolute w-full bottom-0">
+            <div className={cn(
+                !userWordProgresses && "absolute w-full bottom-0"
+            )}>
                 <Footer />
             </div>
         </div>
