@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import useLesson from '@/app/admin/_data/useLesson';
+import useLesson from '@/data/useLesson';
 import EditLesson from '@/app/admin/_components/EditLesson';
 import WordList from '@/app/admin/_components/WordList';
 import { getLessonWordsByLessonId } from '@/data/lessonWord';
@@ -12,49 +12,38 @@ import { Word, LessonWord } from '@/types';
 
 const LessonDetail: React.FC = () => {
     const router = useRouter();
-    const { id } = useParams();
+    const { id: lessonId } = useParams();
     const { getLesson, deleteLesson } = useLesson();
     const [lesson, setLesson] = useState<Lesson | null>(null);
     const [wordList, setWordList] = useState<Word[]>([]);
 
-    const fetchLesson = async () => {
-        if (id) {
-            const fetchedLesson = await getLesson(Number(id));
+
+    const fetchLessonData = async () => {
+        if (lessonId) {
+            const fetchedLesson = await getLesson(Number(lessonId));
             if (fetchedLesson) {
                 setLesson(fetchedLesson);
-            }
-        }
-    };
-
-    // Wordをフェッチする関数
-    const fetchWords = async () => {
-        if (lesson) {
-            const lessonWords = await getLessonWordsByLessonId(lesson.id);
-            if (lessonWords) {
-                const mappedWords: Word[] = lessonWords.map((lw: LessonWord) => ({
-                    id: lw.word.id,
-                    english: lw.word.english,
-                    japanese: lw.word.japanese,
-                    mp3path: lw.word.mp3path,
-                }));
-                setWordList(mappedWords);
+                const lessonWords = await getLessonWordsByLessonId(fetchedLesson.id);
+                if (lessonWords) {
+                    const mappedWords: Word[] = lessonWords.map((lw: LessonWord) => ({
+                        id: lw.word.id,
+                        english: lw.word.english,
+                        japanese: lw.word.japanese,
+                        mp3path: lw.word.mp3path,
+                    }));
+                    setWordList(mappedWords);
+                }
             }
         }
     };
 
     useEffect(() => {
-        fetchLesson();
-    }, [id]);
-
-    useEffect(() => {
-        if (lesson) {
-            fetchWords();
-        }
-    }, [lesson]);
+        fetchLessonData();
+    }, [lessonId]);
 
     const handleDelete = async () => {
-        if (id) {
-            await deleteLesson(Number(id));
+        if (lessonId) {
+            await deleteLesson(Number(lessonId));
             router.push('/admin/dashboard/lessons');
         }
     };
@@ -81,7 +70,7 @@ const LessonDetail: React.FC = () => {
             <AddWord 
                 lessonId={lesson.id} 
                 setWordList={setWordList} 
-                fetchWords={fetchWords}
+                fetchWords={fetchLessonData}
             />
             
             <button
