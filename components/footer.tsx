@@ -6,13 +6,13 @@ const Footer = () => {
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-4 md:mb-0">
                     <ul className="flex items-center justify-center space-x-8">
-                        <Link href="/operator">
+                        <Link href="/operator" className="text-blue-500 underline" target="_blank">
                             運営元
                         </Link>
-                        <Link href="/terms">
+                        <Link href="/terms" className="text-blue-500 underline" target="_blank">
                             利用規約
                         </Link>
-                        <Link href="/privacy">
+                        <Link href="/privacy" className="text-blue-500 underline" target="_blank">
                             プライバシーポリシー
                         </Link>
                     </ul>
