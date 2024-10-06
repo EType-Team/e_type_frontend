@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 
 const AuthLayout = ({
@@ -13,6 +14,9 @@ const AuthLayout = ({
             <main className="pt-[70px] h-full flex flex-col items-center justify-center">
                 {children}
             </main>
+            <div className="mt-[200px]">
+                <Footer />
+            </div>
         </div>
     )
 }
