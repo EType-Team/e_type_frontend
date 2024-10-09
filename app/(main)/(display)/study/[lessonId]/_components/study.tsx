@@ -25,17 +25,20 @@ const Study = ({
     words
 }: StudyProps) => {
     const [isActive, setIsActive] = useState(0)
-    const [onEnd, setOnEnd] = useState(0)
-    const resetCompletedWords = useTypingStore((state) => state.resetCompletedWords)
-    const resetTestTypingStore = useTestTypingStore((state) => state.resetTestTypingStore)
+    const { storedValue: lastLessonId, setValue: setLastLessonId, remove: removeLastLessonId } = useSessionStorage<number>('lastLessonId', 0)
+    const { notCorrectWordIds, resetWordIds } = useWordSessionStorage()
+    const isLastLessonId = (lessonId === lastLessonId) && notCorrectWordIds.length !== 0
 
     const handleStart = () => {
-        resetCompletedWords()
+        resetWordIds()
+        removeLastLessonId()
         setIsActive(1)
     }
 
     const handleTest = () => {
-        resetTestTypingStore()
+        resetWordIds()
+        removeLastLessonId()
+        setLastLessonId(lessonId)
         setIsActive(2)
     }
 
@@ -56,6 +59,7 @@ const Study = ({
                 <ReadyCard
                     label={label}
                     time={time}
+                    isLastLessonId={isLastLessonId}
                     onStart={handleStart}
                     onTest={handleTest}
                 />
