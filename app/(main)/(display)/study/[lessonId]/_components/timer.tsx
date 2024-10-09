@@ -15,9 +15,10 @@ const Timer = ({
     onEnd
 }: TimerProps) => {
     const [progress, setProgress] = useState(0)
+    const [hasEnded, setHasEnded] = useState(false)
 
     useEffect(() => {
-        if (!isActive) return
+        if (!isActive || hasEnded) return
 
         const updateInterval = 100
         const increment = 100 / (time / updateInterval)
@@ -26,6 +27,7 @@ const Timer = ({
             setProgress((prevProgress) => {
                 if (prevProgress >= 100) {
                     clearInterval(intervalId)
+                    setHasEnded(true)
                     onEnd()
                     return 100
                 }
@@ -34,7 +36,7 @@ const Timer = ({
         }, updateInterval)
 
         return () => clearInterval(intervalId)
-    }, [isActive])
+    }, [isActive, onEnd])
 
 
     return ( 
