@@ -13,6 +13,7 @@ interface PlayCardProps {
         english: string
         japanese: string
         mp3Path: string
+        isIncorrect: boolean
     }[]
 }
 
@@ -95,6 +96,11 @@ const PlayCard = ({
 
     return (
         <div className="flex flex-col items-center">
+            {words[currentIndex].isIncorrect && (
+                <p className="test-center text-sm">
+                    テストで間違えた単語です
+                </p>
+            )}
             <p className="text-5xl font-bold">
                 {words[currentIndex].english.split("").map((char, index) => (
                     <span

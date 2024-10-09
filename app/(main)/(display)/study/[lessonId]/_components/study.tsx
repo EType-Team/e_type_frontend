@@ -15,6 +15,7 @@ type word = {
     english: string
     japanese: string
     mp3Path: string
+    isIncorrect: boolean
 }
 
 interface StudyProps {
@@ -43,17 +44,20 @@ const Study = ({
         if (isActive === 0) {
             const sorted = isLastLessonId
             ? [...words].sort((a, b) => {
-                const isAInNotCorrect = notCorrectWordIds.includes(a.id)
-                const isBInNotCorrect = notCorrectWordIds.includes(b.id)
-
-                if (isAInNotCorrect && !isBInNotCorrect) return -1
-                if (!isAInNotCorrect && isBInNotCorrect) return 1
-                return 0
+                const isAInNotCorrect = notCorrectWordIds.includes(a.id);
+                const isBInNotCorrect = notCorrectWordIds.includes(b.id);
+    
+                if (isAInNotCorrect) a.isIncorrect = true;
+                if (isBInNotCorrect) b.isIncorrect = true;
+    
+                if (isAInNotCorrect && !isBInNotCorrect) return -1;
+                if (!isAInNotCorrect && isBInNotCorrect) return 1;
+                return 0;
             })
-            : words
-            setSortedWords(sorted)
+            : words.map(word => ({ ...word, isIncorrect: false }));
+            setSortedWords(sorted);
         }
-    }, [notCorrectWordIds, words, isLastLessonId, isActive])
+    }, [notCorrectWordIds, words, isLastLessonId, isActive]);
 
     const handleStart = () => {
         resetWordIds()
