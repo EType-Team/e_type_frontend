@@ -14,18 +14,14 @@ interface StudyProps {
     label: string
     time: number
     cookie: string
-    words: {
-        id: number
-        english: string
-        japanese: string
-        mp3Path: string
-    }[]
+    lessonId: number
 }
 
 const Study = ({
     label,
     time,
     cookie,
+    lessonId,
     words
 }: StudyProps) => {
     const [isActive, setIsActive] = useState(0)
