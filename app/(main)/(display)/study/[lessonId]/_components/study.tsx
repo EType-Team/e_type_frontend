@@ -54,7 +54,7 @@ const Study = ({
             <Timer 
                 time={time}
                 isActive={isActive === 1 || isActive === 2}
-                onEnd={() => setOnEnd(1)}
+                onEnd={handleTimerEnd}
             />
             {isActive === 0 && !onEnd && (
                 <ReadyCard
