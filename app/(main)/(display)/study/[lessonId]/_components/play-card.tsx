@@ -1,9 +1,9 @@
 'use client'
 
 import { handleCurrectTyping } from "@/data/userWordProgress"
+import useWordSessionStorage from "@/hooks/use-word-session-storage"
 import { cn } from "@/lib/utils"
 import { useSoundStore } from "@/store/sound-store"
-import { useTypingStore } from "@/store/typing-store"
 import { useEffect, useRef, useState } from "react"
 
 interface PlayCardProps {
@@ -25,7 +25,7 @@ const PlayCard = ({
     const [correct, setCorrect] = useState(false)
     const inputRef = useRef("")
 
-    const addCompletedWordId = useTypingStore((state) => state.addCompletedWordId)
+    const { addCorrectWordId } = useWordSessionStorage()
     const soundEnabled = useSoundStore((state) => state.soundEnabled)
 
     const audioCache = useRef<Record<number, HTMLAudioElement>>({})
@@ -71,7 +71,7 @@ const PlayCard = ({
 
                 // handleCurrectTyping を非同期で呼び出し
                 handleCurrectTyping(words[currentIndex].id, cookie).then(() => {
-                    addCompletedWordId(words[currentIndex].id);
+                    addCorrectWordId(words[currentIndex].id);
                 }).catch(error => {
                     console.error("handleCurrectTyping 中にエラーが発生しました:", error)
                 })
