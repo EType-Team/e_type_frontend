@@ -42,6 +42,12 @@ const Study = ({
         resetTestTypingStore()
         setIsActive(2)
     }
+
+    const handleTimerEnd = useCallback(() => {
+        setTimeout(() => {
+            setOnEnd(true)
+        }, 0)
+    }, [])
     
     return (
         <>
@@ -50,7 +56,7 @@ const Study = ({
                 isActive={isActive === 1 || isActive === 2}
                 onEnd={() => setOnEnd(1)}
             />
-            {isActive === 0 && onEnd === 0 && (
+            {isActive === 0 && !onEnd && (
                 <ReadyCard
                     label={label}
                     time={time}
@@ -58,19 +64,19 @@ const Study = ({
                     onTest={handleTest}
                 />
             )}
-            {isActive === 1 && onEnd === 0 && (
+            {isActive === 1 && !onEnd && (
                 <PlayCard
                     words={words}
                     cookie={cookie}
                 />
             )}
-            {isActive === 2 && onEnd === 0 && (
+            {isActive === 2 && !onEnd && (
                 <TestCard
                     words={words}
                     cookie={cookie}
                 />
             )}
-            {(isActive === 1 || isActive === 2) && onEnd === 1 && (
+            {(isActive === 1 || isActive === 2) && onEnd && (
                 <ResultCard
                     resultType={isActive}
                 />
