@@ -1,7 +1,7 @@
 import { handleCurrectTestTyping } from "@/data/userWordProgress"
+import useWordSessionStorage from "@/hooks/use-word-session-storage"
 import { cn } from "@/lib/utils"
 import { useSoundStore } from "@/store/sound-store"
-import { useTestTypingStore } from "@/store/test-typing-store"
 import { useEffect, useRef, useState } from "react"
 
 interface TestCardProps {
@@ -24,8 +24,7 @@ const TestCard = ({
     const [ansWord, setAnsWord] = useState("")
     const [isKeyDisabled, setIsKeyDisabled] = useState(false)
 
-    const addCorrectWordId = useTestTypingStore((state) => state.addCorrectWordId)
-    const addNotCorrectWordId = useTestTypingStore((state) => state.addNotCorrectWordId)
+    const { addCorrectWordId, addNotCorrectWordId } = useWordSessionStorage()
 
     const soundEnabled = useSoundStore((state) => state.soundEnabled)
     const audioCache = useRef<Record<number, HTMLAudioElement>>({})

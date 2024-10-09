@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react"
 import ResultContent from "./result-content"
-import { useTypingStore } from "@/store/typing-store"
 import ResultTestContent from "./result-test-content"
-import { useTestTypingStore } from "@/store/test-typing-store"
+import useWordSessionStorage from "@/hooks/use-word-session-storage"
 
 interface ResultCardProps {
     resultType: number
@@ -14,13 +13,14 @@ const ResultCard = ({
     resultType
 }: ResultCardProps) => {
     const [isResult, setIsResult] = useState(false)
-    const completedWordIds = useTypingStore((state) => state.completedWordIds)
-    const correctWordIds = useTestTypingStore((state) => state.correctWordIds)
-    const notCorrectWordIds = useTestTypingStore((state) => state.notCorrectWordIds)
+    const {
+        correctWordIds,
+        notCorrectWordIds,
+    } = useWordSessionStorage()
 
-    const totalTypingNum = completedWordIds.length
     const totalCorrectWordNum = correctWordIds.length
     const totalNotCorrectWordNum = notCorrectWordIds.length
+    const totalTypingNum = totalCorrectWordNum + totalNotCorrectWordNum
 
     useEffect(() => {
         setTimeout(() => setIsResult(true), 3000);

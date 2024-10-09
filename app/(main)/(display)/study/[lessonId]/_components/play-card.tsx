@@ -1,9 +1,9 @@
 'use client'
 
 import { handleCurrectTyping } from "@/data/userWordProgress"
+import useWordSessionStorage from "@/hooks/use-word-session-storage"
 import { cn } from "@/lib/utils"
 import { useSoundStore } from "@/store/sound-store"
-import { useTypingStore } from "@/store/typing-store"
 import { useEffect, useRef, useState } from "react"
 
 interface PlayCardProps {
@@ -13,6 +13,7 @@ interface PlayCardProps {
         english: string
         japanese: string
         mp3Path: string
+        isIncorrect: boolean
     }[]
 }
 
@@ -25,7 +26,7 @@ const PlayCard = ({
     const [correct, setCorrect] = useState(false)
     const inputRef = useRef("")
 
-    const addCompletedWordId = useTypingStore((state) => state.addCompletedWordId)
+    const { addCorrectWordId } = useWordSessionStorage()
     const soundEnabled = useSoundStore((state) => state.soundEnabled)
 
     const audioCache = useRef<Record<number, HTMLAudioElement>>({})
@@ -71,7 +72,7 @@ const PlayCard = ({
 
                 // handleCurrectTyping を非同期で呼び出し
                 handleCurrectTyping(words[currentIndex].id, cookie).then(() => {
-                    addCompletedWordId(words[currentIndex].id);
+                    addCorrectWordId(words[currentIndex].id);
                 }).catch(error => {
                     console.error("handleCurrectTyping 中にエラーが発生しました:", error)
                 })
@@ -95,6 +96,11 @@ const PlayCard = ({
 
     return (
         <div className="flex flex-col items-center">
+            {words[currentIndex].isIncorrect && (
+                <p className="test-center text-sm">
+                    テストで間違えた単語です
+                </p>
+            )}
             <p className="text-5xl font-bold">
                 {words[currentIndex].english.split("").map((char, index) => (
                     <span
