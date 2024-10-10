@@ -41,6 +41,7 @@ const StudyLessonIdPage = async ({
                 label={lesson.title}
                 time={30000}
                 cookie={cookie}
+                lessonId={params.lessonId}
                 words={shuffledWords}
             />
          </div>
