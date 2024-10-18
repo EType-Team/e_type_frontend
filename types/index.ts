@@ -44,3 +44,10 @@ export type LessonWord = {
     wordId: string
     word: Word
 }
+
+export interface LessonData {
+    id: number;
+    title: string;
+    description: string;
+    words: Word[];
+}
