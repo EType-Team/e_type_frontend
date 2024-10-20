@@ -2,7 +2,9 @@ import { Lesson } from "@/types"
 
 export const getLessons = async (): Promise<Lesson[] | null> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lessons`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lessons`, {
+            cache: "no-cache"
+        })
         if (!response.ok) {
             return null
         }
